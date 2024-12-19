@@ -1,12 +1,19 @@
+import { env } from './environment';
+
 export const API_CONFIG = {
-  baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  baseUrl: env.VITE_API_URL,
+  timeout: 10000,
+  retryAttempts: 3,
   endpoints: {
-    portfolio: '/api/portfolio',
-    recommendations: '/api/recommendations',
-    transactions: '/api/transactions'
+    auth: {
+      login: '/auth/login',
+      register: '/auth/register',
+      logout: '/auth/logout',
+    },
+    portfolio: {
+      assets: '/portfolio/assets',
+      transactions: '/portfolio/transactions',
+      recommendations: '/portfolio/recommendations',
+    },
   },
-  refreshIntervals: {
-    portfolio: 60 * 60 * 1000, // 1 hour
-    recommendations: 60 * 60 * 1000 // 1 hour
-  }
 } as const;

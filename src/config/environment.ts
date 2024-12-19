@@ -1,20 +1,26 @@
-export const config = {
-  infuraId: import.meta.env.VITE_INFURA_ID || '',
-  openAiKey: import.meta.env.VITE_OPENAI_API_KEY || '',
-  coinbaseConfig: {
-    appName: 'AI Crypto Portfolio',
-    appLogoUrl: 'https://example.com/logo.png',
-    darkMode: false,
-    defaultChainId: 1, // Ethereum Mainnet
-  }
-} as const;
+import { z } from 'zod';
 
-// Validate required environment variables
-export function validateConfig() {
-  const required = ['VITE_INFURA_ID', 'VITE_OPENAI_API_KEY'];
-  const missing = required.filter(key => !import.meta.env[key]);
-  
-  if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+const envSchema = z.object({
+  VITE_API_URL: z.string().url(),
+  VITE_INFURA_ID: z.string().min(1),
+  VITE_ENABLE_ANALYTICS: z.string().transform(val => val === 'true'),
+  VITE_ENABLE_MOCK_DATA: z.string().transform(val => val === 'true'),
+});
+
+export type Environment = z.infer<typeof envSchema>;
+
+export function validateEnvironment(): Environment {
+  try {
+    return envSchema.parse({
+      VITE_API_URL: import.meta.env.VITE_API_URL,
+      VITE_INFURA_ID: import.meta.env.VITE_INFURA_ID,
+      VITE_ENABLE_ANALYTICS: import.meta.env.VITE_ENABLE_ANALYTICS,
+      VITE_ENABLE_MOCK_DATA: import.meta.env.VITE_ENABLE_MOCK_DATA,
+    });
+  } catch (error) {
+    console.error('Environment validation failed:', error);
+    throw new Error('Invalid environment configuration');
   }
 }
+
+export const env = validateEnvironment();

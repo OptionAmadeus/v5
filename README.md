@@ -24,7 +24,7 @@ AI-powered portfolio management platform built with React, TypeScript, and Tailw
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - npm 8+
 
 ### Installation
@@ -60,23 +60,19 @@ npm run build
 
 ```
 src/
-├── components/       # Reusable UI components
-├── hooks/           # Custom React hooks
-├── lib/            # Third-party integrations
-├── pages/          # Page components
-├── services/       # API services
-├── stores/         # State management
-├── types/          # TypeScript types
-└── utils/          # Utility functions
+├── components/     # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/           # Third-party integrations
+├── pages/         # Page components
+├── services/      # API services
+├── stores/        # State management
+├── types/         # TypeScript types
+└── utils/         # Utility functions
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 

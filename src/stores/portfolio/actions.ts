@@ -1,4 +1,5 @@
 import { portfolioApi } from '@/lib/api/portfolio';
+import { recommendationsService } from '@/services/recommendations';
 import { calculatePortfolioStats } from '@/utils/portfolio';
 import type { PortfolioState } from './slice';
 
@@ -33,10 +34,10 @@ export const createPortfolioActions = (set: (fn: (state: PortfolioState) => Part
   getRecommendations: async () => {
     try {
       set(state => ({ ...state, isLoading: true, error: null }));
-      const response = await portfolioApi.getRecommendations();
+      const recommendations = await recommendationsService.getRecommendations();
       set(state => ({
         ...state,
-        recommendations: response.data,
+        recommendations,
         isLoading: false,
       }));
     } catch (error) {

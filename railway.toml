@@ -3,7 +3,7 @@ builder = "NIXPACKS"
 nixpacksConfigPath = "backend/nixpacks.toml"
 
 [deploy]
-startCommand = "cd backend && npm install --production && npm start"
+startCommand = "cd backend && npm ci --only=production --no-audit --no-fund && npm start"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
